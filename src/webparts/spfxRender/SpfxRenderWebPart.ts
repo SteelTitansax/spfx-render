@@ -5,12 +5,12 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import type { IReadonlyTheme } from '@microsoft/sp-component-base';
-import { escape } from '@microsoft/sp-lodash-subset';
+//import { escape } from '@microsoft/sp-lodash-subset';
 
 //import styles from './SpfxRenderWebPart.module.scss';
 import * as strings from 'SpfxRenderWebPartStrings';
 // Required for render 
-import {ISPHttpClientOptions, SPHttpClient, SPHttpClientResponse} from '@microsoft/sp-http';
+import {SPHttpClient, SPHttpClientResponse} from '@microsoft/sp-http';
 
 export interface SPTestList{
   value: SPTestListItem[];
@@ -39,13 +39,13 @@ export default class SpfxRenderWebPart extends BaseClientSideWebPart<ISpfxRender
 
     this._getListData().then((response) => {
 
-      let html: string = `<table width=100% >`;
+      let html: string = `<table width=100% style='border: 1px solid'>`;
       response.value.forEach((item: SPTestListItem) =>{
         
           html += `
         <tr>
-            <td> ${item.Title} </td> 
-            <td> ${item.Description} </td> 
+            <td style='border: 1px solid'> ${item.Title} </td> 
+            <td style='border: 1px solid'> ${item.Description} </td> 
         </tr>
         `    
 
@@ -68,6 +68,7 @@ export default class SpfxRenderWebPart extends BaseClientSideWebPart<ISpfxRender
     <div id="spListDiv"/> 
     </div>
     `
+    this._renderList();
   }
 
 
